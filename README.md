@@ -13,9 +13,9 @@ Simplify cluster orchestration and capacity planning by ensuring container limit
 - **RAM (GB)**: Working set memory (`Memory - Cache`) averaged.
 - **Storage (GB)**: Sum of container read-write layers and unique volume host directories.
 - **VRU Score Formula**:
-  $$VRU = \left(0.3 \cdot \frac{\text{Avg\_CPU\_vCPUs}}{0.2}\right) + \left(0.7 \cdot \frac{\text{Avg\_RAM\_GB}}{0.5}\right) + \text{Storage\_Penalty}$$
+  $$VRU = \left(0.3 \cdot \frac{\text{Avg CPU (vCPUs)}}{0.2}\right) + \left(0.7 \cdot \frac{\text{Avg RAM (GB)}}{0.5}\right) + \text{Storage Penalty}$$
 - **Storage Penalty**:
-  $$\text{Storage\_Penalty} = \max\left(0, \frac{\text{Actual\_Storage\_GB} - \text{Core\_Tier\_Fair\_Share\_Storage}}{25}\right)$$
+  $$\text{Storage Penalty} = \max\left(0, \frac{\text{Actual Storage (GB)} - \text{Core Tier Fair-Share Storage}}{25}\right)$$
 
 ### Tier Thresholds
 

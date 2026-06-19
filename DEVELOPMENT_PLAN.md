@@ -24,8 +24,8 @@ Build a local application sizing CLI tool in Python 3.11+ that:
 
 ### Phase 2: Mathematical Scoring Core
 - [x] Implement mathematical formulas in `vdecent_size/formulas.py`:
-  - **VRU Formula**: $VRU = (0.3 \cdot \frac{\text{Avg\_CPU\_vCPUs}}{0.2}) + (0.7 \cdot \frac{\text{Avg\_RAM\_GB}}{0.5}) + \text{Storage\_Penalty}$
-  - **Storage Penalty**: $\text{Storage\_Penalty} = \max(0, \frac{\text{Actual\_Storage\_GB} - \text{Core\_Tier\_Fair\_Share\_Storage}}{25})$
+  - **VRU Formula**: $VRU = (0.3 \cdot \frac{\text{Avg CPU (vCPUs)}}{0.2}) + (0.7 \cdot \frac{\text{Avg RAM (GB)}}{0.5}) + \text{Storage Penalty}$
+  - **Storage Penalty**: $\text{Storage Penalty} = \max(0, \frac{\text{Actual Storage (GB)} - \text{Core Tier Fair-Share Storage}}{25})$
   - **Tier Mapping Logic** (S: VRU $\le 1.2$, M: $1.2 < \text{VRU} \le 2.4$, L: $2.4 < \text{VRU} \le 4.8$, XL: $\text{VRU} > 4.8$).
 - [x] Write unit tests for formulas to ensure 100% mathematical correctness.
 
