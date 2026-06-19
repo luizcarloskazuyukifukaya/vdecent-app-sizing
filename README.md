@@ -43,9 +43,30 @@ Simplify cluster orchestration and capacity planning by ensuring container limit
    ```
 
 ### Running Telemetry Profiler
-Profile a running docker-compose stack for 1 minute:
+There are three ways to execute the profiler on your target application stack:
+
+#### Option A: Running from the target project directory (Auto-detection)
+Activate the virtual environment where the tool is installed, navigate (`cd`) to your target project folder (which contains the compose file), and run the tool. It will auto-detect the configuration:
 ```bash
+# 1. Activate the environment from the tool's install directory
+cd ~/projects/vdecent-app-sizing
+source .venv/bin/activate
+
+# 2. Navigate to your target project and run
+cd ~/projects/Andreia-online-store
 vdecent-size profile --duration 1
+```
+
+#### Option B: Specifying the Compose File path
+Execute the tool from any directory by pointing directly to the target project's compose configuration file:
+```bash
+vdecent-size profile --duration 1 --compose-file ~/projects/Andreia-online-store/docker-compose.yml
+```
+
+#### Option C: Specifying the Project Name (For already running stacks)
+If the target project's docker-compose containers are already active, you can profile them from any directory by passing its compose project name (e.g. check running project labels via `docker ps`):
+```bash
+vdecent-size profile --duration 1 --project-name andreia-online-store
 ```
 
 ### 🛰️ V-Decent Application Manager Reference
