@@ -1,0 +1,21 @@
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Python cache and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+
+# Local sizing outputs
+vdecent-size.json
+vdecent-tier.json
+
+# IDE config
+.vscode/
+.idea/

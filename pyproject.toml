@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vdecent-size"
+version = "0.1.0"
+description = "V-Decent App Sizing CLI Tool"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "click>=8.0.0",
+    "docker>=7.0.0",
+    "PyYAML>=6.0",
+]
+
+[project.scripts]
+vdecent-size = "vdecent_size.cli:main"
