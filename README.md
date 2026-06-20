@@ -35,6 +35,10 @@ Simplify cluster orchestration and capacity planning by ensuring container limit
 
 ### Installation
 1. Clone this repository.
+   ```bash
+   git clone https://github.com/luizcarloskazuyukifukaya/vdecent-app-sizing
+   ```
+
 2. Initialize virtual environment:
    ```bash
    python3 -m venv .venv
