@@ -51,18 +51,6 @@ The orchestrator balances cluster workload using a \+10% maximum overcommit marg
 * **Target Node Rating:** 16.0 VRUs maximum.  
 * **Hard Overcommit Capacity (+10%):** 17.6 VRUs maximum. The node scheduler completely rejects incoming application deployments if the node's collective VRU score breaches 17.6.
 
-## **5\. Operational Lifecycles & Telemetry Re-negotiation**
-
-Rather than demanding explicit infrastructure files from developers during initial setup, the platform deploys apps under an implicit baseline assumption and triggers adjustments via real-world telemetry.
-
-1. **Initial Deployment:** The application is provisioned and categorized under the 'S' tier parameters by default.  
-2. **Continuous Monitoring:** The Application Manager (AM) monitors runtime execution metrics to compile a continuous monthly moving average.  
-3. **The 110% Tolerated Ceiling:** Fluctuations up to \+10% past a tier ceiling are tolerated (e.g., an 'S' app can operate up to 1.1 VRU during peak traffic periods without consequences).  
-4. **Operational Flags:** If the monthly moving average establishes consumption exceeding the 110% buffer zone (e.g., \>1.1 VRU for an S App), the system surfaces statistic data directly within the Application Manager user interface.
-
-\[Insert Image Here: Flowchart demonstrating telemetry data triggering warning flag when average monthly VRU breaches the 110% threshold\]  
-This statistical logging equips the operations team with deterministic data required to initiate contract tier renegotiations, prompting the system or account executive to transition the client smoothly into the next pricing tier (e.g., moving from S to M size) while safeguarding distributed grid stability.
-
 # **Implementation**
 
 To implement the resource limits based on the V-Decent blueprint within your Coolify deployment pipeline, you can utilize the Coolify API to programmatically enforce resource constraints at the application level.  
@@ -106,29 +94,3 @@ JSON
 }
 
 **Important Architecture Safeguard:** Set limits\_memory\_swap to "0m" and limits\_memory\_swappiness to 0. If swap space is permitted, an application exceeding its RAM allocation will dump data to disk swap instead of triggering an immediate telemetry or OOM event, hiddenly degrading performance and breaking your strict RAM-based VRU calculations.
-
-## **3\. Automation Workflow Logic**
-
-Your integration script or orchestration backend should handle application lifecycles using the following automated logic:  
-\[Initial Deploy\] \-\> Default to "S" Limits (0.2 vCPU / 512MB RAM)  
-                         |  
-                         v  
-             \[Continuous Telemetry Monitoring\]  
-                         |  
-                         v  
-       Is 1-Month Moving Average \> 110% of Tier Ceiling?  
-             /                               \\  
-          (Yes)                              (No)  
-           /                                   \\  
-  Trigger AM Flag / Notification         Maintain Current Limits  
-          |  
-  \[Account Re-negotiation / Approval\]  
-          |  
-  Call Coolify API to update to next Tier   
-  (e.g., Update limits\_memory to "1024m")
-
-1. **Default State:** Always provision new applications via the Coolify API using the S parameters by default (0.2 CPU, 512m RAM).  
-2. **Evaluation:** If your Application Manager calculates a monthly moving average that breaches the 110% buffer zone (e.g., \> 1.1 VRU for an S app) , flag it in your operational UI.  
-3. **Execution:** Upon tier transition approval (e.g., upgrading from S to M), execute the Coolify API payload with the newly scaled limits. Coolify will automatically restart the Docker containers gracefully to apply the physical restrictions.
-
-Do you have a preferred programming language or CI/CD tool you are planning to use to write this integration script? I can help you draft the exact automation code block if needed.  

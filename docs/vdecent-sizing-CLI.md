@@ -53,7 +53,6 @@ Upon completion of the profiling window, the script must map the final calculate
 #### **Requirement 3: Output Generation & Export**
 
 * **Terminal UI:** Output a scannable ASCII dashboard displaying the raw metric averages, the finalized VRU score, and the designated V-Decent Application Tier classification.  
-* **Artifact Output:** Write a clean, structured vdecent-tier.json file containing the precise payload data required by the Coolify API configuration endpoint (limits\_cpus, limits\_memory, limits\_memory\_swap: "0m", and limits\_memory\_swappiness: 0).
 
 # **4\. Technical Constraints & Design Rules for Implementation**
 
